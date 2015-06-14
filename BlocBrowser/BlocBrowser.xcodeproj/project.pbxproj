@@ -13,6 +13,7 @@
 		FAA55CAE1B29DBD8004E5EA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA55CAD1B29DBD8004E5EA6 /* Images.xcassets */; };
 		FAA55CB11B29DBD8004E5EA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAA55CAF1B29DBD8004E5EA6 /* LaunchScreen.xib */; };
 		FAA55CBD1B29DBD8004E5EA6 /* BlocBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA55CBC1B29DBD8004E5EA6 /* BlocBrowserTests.m */; };
+		FAA55CC81B2D5FC8004E5EA6 /* AwesomeFloatingToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA55CC71B2D5FC8004E5EA6 /* AwesomeFloatingToolbar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,8 @@
 		FAA55CB61B29DBD8004E5EA6 /* BlocBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA55CBB1B29DBD8004E5EA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAA55CBC1B29DBD8004E5EA6 /* BlocBrowserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlocBrowserTests.m; sourceTree = "<group>"; };
+		FAA55CC61B2D5FC8004E5EA6 /* AwesomeFloatingToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeFloatingToolbar.h; sourceTree = "<group>"; };
+		FAA55CC71B2D5FC8004E5EA6 /* AwesomeFloatingToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeFloatingToolbar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 			children = (
 				FAA55CA41B29DBD8004E5EA6 /* AppDelegate.h */,
 				FAA55CA51B29DBD8004E5EA6 /* AppDelegate.m */,
+				FAA55CC61B2D5FC8004E5EA6 /* AwesomeFloatingToolbar.h */,
+				FAA55CC71B2D5FC8004E5EA6 /* AwesomeFloatingToolbar.m */,
 				FAA55CA71B29DBD8004E5EA6 /* ViewController.h */,
 				FAA55CA81B29DBD8004E5EA6 /* ViewController.m */,
 				FAA55CAD1B29DBD8004E5EA6 /* Images.xcassets */,
@@ -218,6 +223,7 @@
 				FAA55CA91B29DBD8004E5EA6 /* ViewController.m in Sources */,
 				FAA55CA61B29DBD8004E5EA6 /* AppDelegate.m in Sources */,
 				FAA55CA31B29DBD8004E5EA6 /* main.m in Sources */,
+				FAA55CC81B2D5FC8004E5EA6 /* AwesomeFloatingToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
