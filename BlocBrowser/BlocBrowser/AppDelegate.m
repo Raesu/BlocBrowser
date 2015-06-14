@@ -23,6 +23,10 @@
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
     
     [self.window makeKeyAndVisible];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"Welcome to BlocBrowser!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    
     return YES;
 }
 
