@@ -148,13 +148,13 @@
 #pragma mark AwesomeFloatingToolbarDelegate
 
 - (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didSelectButtonWithTitle:(NSString *)title {
-    if ([self.title isEqualToString:kWebBrowserBackString]) {
+    if ([title isEqualToString:kWebBrowserBackString]) {
         [self.webView goBack];
-    } else if ([self.title isEqualToString:kWebBrowserForwardString]) {
+    } else if ([title isEqualToString:kWebBrowserForwardString]) {
         [self.webView goForward];
-    } else if ([self.title isEqualToString:kWebBrowserStopString]) {
+    } else if ([title isEqualToString:kWebBrowserStopString]) {
         [self.webView stopLoading];
-    } else if ([self.title isEqualToString:kWebBrowserRefreshString]) {
+    } else if ([title isEqualToString:kWebBrowserRefreshString]) {
         [self.webView reload];
     }
 }

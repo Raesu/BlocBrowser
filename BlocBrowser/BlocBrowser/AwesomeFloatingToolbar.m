@@ -135,7 +135,7 @@
 }
 
 - (void)panFired:(UIPanGestureRecognizer *)recognizer {
-    if (recognizer.state == UIGestureRecognizerStateRecognized) {
+    //if (recognizer.state == UIGestureRecognizerStateRecognized) {
         CGPoint translation = [recognizer translationInView:self];
         NSLog(@"New Translation: %@", NSStringFromCGPoint(translation));
         
@@ -144,7 +144,7 @@
         }
         
         [recognizer setTranslation:CGPointZero inView:self];
-    }
+    //}
 }
 
 
