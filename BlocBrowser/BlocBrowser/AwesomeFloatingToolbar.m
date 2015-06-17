@@ -21,6 +21,7 @@
 @property (nonatomic, weak) UILabel *currentLabel;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
+@property (nonatomic, strong) UIPinchGestureRecognizer *pinchGesture;
 
 @end
 
@@ -68,6 +69,8 @@
     [self addGestureRecognizer:self.tapGesture];
     self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panFired:)];
     [self addGestureRecognizer:self.panGesture];
+    self.pinchGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pinchFired:)];
+    [self addGestureRecognizer:self.pinchGesture];
     
     return self;
 }
@@ -145,6 +148,12 @@
         
         [recognizer setTranslation:CGPointZero inView:self];
     //}
+}
+
+- (void)pinchFired:(UIPinchGestureRecognizer *)recognizer {
+    // properties scale, state
+    
+
 }
 
 

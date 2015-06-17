@@ -15,7 +15,7 @@
 #define kWebBrowserStopString NSLocalizedString(@"Stop", @"Stop command")
 #define kWebBrowserRefreshString NSLocalizedString(@"Refresh", @"Reload command")
 
-@interface ViewController () <WKNavigationDelegate, UITextFieldDelegate, AwesomeFloatingToolbarDelegate>
+@interface ViewController () <WKNavigationDelegate, UITextFieldDelegate, AwesomeFloatingToolbarDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) WKWebView *webView;
 @property (strong, nonatomic) UITextField *textField;
 @property (nonatomic, strong) AwesomeFloatingToolbar *awesomeToolbar;
@@ -168,6 +168,14 @@
     if (CGRectContainsRect(self.view.bounds, potentialNewFrame)) {
         toolbar.frame = potentialNewFrame;
     }
+}
+
+- (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didTryToPinchWithScale:(CGFloat)scale {
+    
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.awesomeToolbar;
 }
 
 @end
