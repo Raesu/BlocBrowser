@@ -15,7 +15,7 @@
 #define kWebBrowserStopString NSLocalizedString(@"Stop", @"Stop command")
 #define kWebBrowserRefreshString NSLocalizedString(@"Refresh", @"Reload command")
 
-@interface ViewController () <WKNavigationDelegate, UITextFieldDelegate, AwesomeFloatingToolbarDelegate, UIScrollViewDelegate>
+@interface ViewController () <WKNavigationDelegate, UITextFieldDelegate, AwesomeFloatingToolbarDelegate>
 @property (strong, nonatomic) WKWebView *webView;
 @property (strong, nonatomic) UITextField *textField;
 @property (nonatomic, strong) AwesomeFloatingToolbar *awesomeToolbar;
@@ -172,10 +172,14 @@
 
 - (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didTryToPinchWithScale:(CGFloat)scale {
     
-}
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.awesomeToolbar;
+    // this line seems to scale just the text
+    toolbar.transform = CGAffineTransformScale(toolbar.transform, scale, scale);
+    
+    // CGContextScaleCTM(toolbar.frame, scale, scale);
+    // I can't figure out how to use transform (no parameters) and exploration
+    // into it led me to CGAffineTransform which then led me to CGContextScaleCTM
+    // I can't figure out what "context" to put as the first argument
+    
 }
 
 @end

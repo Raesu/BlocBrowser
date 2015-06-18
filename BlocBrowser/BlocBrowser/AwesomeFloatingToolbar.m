@@ -69,7 +69,7 @@
     [self addGestureRecognizer:self.tapGesture];
     self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panFired:)];
     [self addGestureRecognizer:self.panGesture];
-    self.pinchGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pinchFired:)];
+    self.pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchFired:)];
     [self addGestureRecognizer:self.pinchGesture];
     
     return self;
@@ -151,8 +151,12 @@
 }
 
 - (void)pinchFired:(UIPinchGestureRecognizer *)recognizer {
-    // properties scale, state
+    // this is firing properly
+    NSLog(@"New pinch: %f", recognizer.scale);
     
+    if ([self.delegate respondsToSelector:@selector(floatingToolBar:didTryToPinchWithScale:)]) {
+        [self.delegate floatingToolBar:self didTryToPinchWithScale:[recognizer scale]];
+    }
 
 }
 
