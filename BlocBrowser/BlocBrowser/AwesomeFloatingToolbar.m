@@ -165,8 +165,8 @@
 
 - (void)longPressFired:(UILongPressGestureRecognizer *)recognizer {
     NSLog(@"New long press.");
-    if (self.delegate respondsToSelector:@selector(floatingToolBar)) {
-        <#statements#>
+    if ([self.delegate respondsToSelector:@selector(floatingToolBar:didLongPressWithState:)]) {
+        [self.delegate floatingToolBar:self didLongPressWithState:[recognizer state]];
     }
 }
 

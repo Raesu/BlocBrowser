@@ -181,6 +181,12 @@
     // I can't figure out what "context" to put as the first argument
 }
 
+- (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didLongPressWithState:(UIGestureRecognizerState)state {
+    // call initWithTitles again, but modify function to accept NSArray of colors
+    // use % to rotate colors (create a new NSArray)
+    // this still won't work beyond one long press
+}
+
 @end
 
 
