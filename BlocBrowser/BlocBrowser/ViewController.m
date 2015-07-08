@@ -57,6 +57,7 @@
     }
     
     self.view = mainView;
+    self.awesomeToolbar.frame = CGRectMake(20, 100, 280, 60);
 }
 
 - (void)viewWillLayoutSubviews {
@@ -70,7 +71,7 @@
     self.textField.frame = CGRectMake(0, 0, width, itemHeight);
     self.webView.frame = CGRectMake(0, CGRectGetMaxY(self.textField.frame), width, browserHeight);
     
-    self.awesomeToolbar.frame = CGRectMake(20, 100, 280, 60);
+    
 }
 
 #pragma mark - UITextFieldDelegate
@@ -170,21 +171,15 @@
     }
 }
 
-- (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didTryToPinchWithScale:(CGFloat)scale {
-    
+- (void)floatingToolBarDidTryToPinchWithScale:(UIPinchGestureRecognizer*)recognizer {
+    // use the scale to adjust the toolbar size
     // this line seems to scale just the text
-    toolbar.transform = CGAffineTransformScale(toolbar.transform, scale, scale);
+    recognizer.view.transform = CGAffineTransformScale(recognizer.view.transform, recognizer.scale, recognizer.scale);
     
     // CGContextScaleCTM(toolbar.frame, scale, scale);
     // I can't figure out how to use transform (no parameters) and exploration
     // into it led me to CGAffineTransform which then led me to CGContextScaleCTM
     // I can't figure out what "context" to put as the first argument
-}
-
-- (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didLongPressWithState:(UIGestureRecognizerState)state {
-    // call initWithTitles again, but modify function to accept NSArray of colors
-    // use % to rotate colors (create a new NSArray)
-    // this still won't work beyond one long press
 }
 
 @end

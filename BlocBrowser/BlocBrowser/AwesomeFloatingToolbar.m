@@ -56,6 +56,8 @@
             label.backgroundColor = colorForThisLabel;
             label.textColor = [UIColor whiteColor];
             
+            //self.backLabel = label
+            
             [labelsArray addObject:label];
         }
         
@@ -157,17 +159,18 @@
     // this is firing properly
     NSLog(@"New pinch: %f", recognizer.scale);
     
-    if ([self.delegate respondsToSelector:@selector(floatingToolBar:didTryToPinchWithScale:)]) {
-        [self.delegate floatingToolBar:self didTryToPinchWithScale:[recognizer scale]];
+    if ([self.delegate respondsToSelector:@selector(floatingToolBarDidTryToPinchWithScale:)]) {
+        [self.delegate floatingToolBarDidTryToPinchWithScale:recognizer];
     }
 
 }
 
 - (void)longPressFired:(UILongPressGestureRecognizer *)recognizer {
     NSLog(@"New long press.");
-    if ([self.delegate respondsToSelector:@selector(floatingToolBar:didLongPressWithState:)]) {
-        [self.delegate floatingToolBar:self didLongPressWithState:[recognizer state]];
-    }
+    //save last color in variable
+    //set second - fourth colors equal to first - third colors
+    //set first color equal to variable
+    // self.subviews[0].view.backgroundColor = self.subviews[1].view.backgroundColor;
 }
 
 
