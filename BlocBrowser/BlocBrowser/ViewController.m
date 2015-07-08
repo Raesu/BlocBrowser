@@ -49,7 +49,7 @@
     self.textField.backgroundColor = [UIColor colorWithWhite:220/255.0f alpha:1];
     self.textField.delegate = self;
     
-    self.awesomeToolbar = [[AwesomeFloatingToolbar alloc] initWithFourTitles:@[kWebBrowserBackString, kWebBrowserForwardString, kWebBrowserStopString, kWebBrowserRefreshString]];
+    self.awesomeToolbar = [[AwesomeFloatingToolbar alloc] initWithFourTitles];
     self.awesomeToolbar.delegate = self;
     
     for (UIView *viewToAdd in @[self.webView, self.textField, self.awesomeToolbar]) {
@@ -128,10 +128,10 @@
     
     self.webView.isLoading ? [self.activityIndicator startAnimating] : [self.activityIndicator stopAnimating];
     
-    [self.awesomeToolbar setEnabled:[self.webView canGoBack] forButtonWithTitle:kWebBrowserBackString];
-    [self.awesomeToolbar setEnabled:[self.webView canGoForward] forButtonWithTitle:kWebBrowserForwardString];
-    [self.awesomeToolbar setEnabled:[self.webView isLoading] forButtonWithTitle:kWebBrowserStopString];
-    [self.awesomeToolbar setEnabled:![self.webView isLoading] && self.webView.URL forButtonWithTitle:kWebBrowserRefreshString];
+    [self.awesomeToolbar setEnabled:[self.webView canGoBack] forButtonWithIndex:0];
+    [self.awesomeToolbar setEnabled:[self.webView canGoForward] forButtonWithIndex:1];
+    [self.awesomeToolbar setEnabled:[self.webView isLoading] forButtonWithIndex:2];
+    [self.awesomeToolbar setEnabled:![self.webView isLoading] && self.webView.URL forButtonWithIndex:3];
     
 }
 
@@ -180,6 +180,29 @@
     // I can't figure out how to use transform (no parameters) and exploration
     // into it led me to CGAffineTransform which then led me to CGContextScaleCTM
     // I can't figure out what "context" to put as the first argument
+}
+
+- (void)forwardPressed {
+    [self.awesomeToolbar.forwardButton setAlpha:1];
+    [self.webView goForward];
+    [self.awesomeToolbar.forwardButton setAlpha:0.25];
+}
+
+- (void)backPressed {
+    [self.webView goBack];
+}
+
+- (void)refreshPressed {
+    // tried to get the refresh button to react to the button press but it happens too quickly
+    // the updateButtonsAndTitle function manages it anyway
+    
+    [self.awesomeToolbar.refreshButton setAlpha:1];
+    [self.webView reload];
+    [self.awesomeToolbar.refreshButton setAlpha:0.25];
+}
+
+- (void)stopPressed {
+    [self.webView stopLoading];
 }
 
 @end

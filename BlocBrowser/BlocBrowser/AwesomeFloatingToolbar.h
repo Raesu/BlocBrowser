@@ -12,17 +12,25 @@
 @protocol AwesomeFloatingToolbarDelegate <NSObject>
 
 @optional
-- (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didSelectButtonWithTitle:(NSString *)title;
 - (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didTryToPanWithOffset:(CGPoint)offset;
 - (void)floatingToolBarDidTryToPinchWithScale:(UIPinchGestureRecognizer*)recognizer;
 - (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didLongPressWithState:(UIGestureRecognizerState)state;
+- (void)backPressed;
+- (void)forwardPressed;
+- (void)stopPressed;
+- (void)refreshPressed;
 @end
 
 @interface AwesomeFloatingToolbar : UIView
 
 @property (nonatomic, weak) id <AwesomeFloatingToolbarDelegate> delegate;
 
-- (instancetype)initWithFourTitles:(NSArray *)titles;
-- (void) setEnabled:(BOOL)enabled forButtonWithTitle:(NSString *)title;
+@property (nonatomic, strong) UIButton *forwardButton;
+@property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) UIButton *refreshButton;
+@property (nonatomic, strong) UIButton *stopButton;
+
+- (instancetype)initWithFourTitles;
+- (void) setEnabled:(BOOL)enabled forButtonWithIndex:(NSUInteger)index;
 
 @end
