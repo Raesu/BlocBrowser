@@ -49,7 +49,7 @@
     self.textField.backgroundColor = [UIColor colorWithWhite:220/255.0f alpha:1];
     self.textField.delegate = self;
     
-    self.awesomeToolbar = [[AwesomeFloatingToolbar alloc] initWithFourTitles:@[kWebBrowserBackString, kWebBrowserForwardString, kWebBrowserStopString, kWebBrowserRefreshString]];
+    self.awesomeToolbar = [[AwesomeFloatingToolbar alloc] initWithFourTitles];
     self.awesomeToolbar.delegate = self;
     
     for (UIView *viewToAdd in @[self.webView, self.textField, self.awesomeToolbar]) {
@@ -57,6 +57,7 @@
     }
     
     self.view = mainView;
+    self.awesomeToolbar.frame = CGRectMake(20, 100, 280, 60);
 }
 
 - (void)viewWillLayoutSubviews {
@@ -70,7 +71,7 @@
     self.textField.frame = CGRectMake(0, 0, width, itemHeight);
     self.webView.frame = CGRectMake(0, CGRectGetMaxY(self.textField.frame), width, browserHeight);
     
-    self.awesomeToolbar.frame = CGRectMake(20, 100, 280, 60);
+    
 }
 
 #pragma mark - UITextFieldDelegate
@@ -127,10 +128,10 @@
     
     self.webView.isLoading ? [self.activityIndicator startAnimating] : [self.activityIndicator stopAnimating];
     
-    [self.awesomeToolbar setEnabled:[self.webView canGoBack] forButtonWithTitle:kWebBrowserBackString];
-    [self.awesomeToolbar setEnabled:[self.webView canGoForward] forButtonWithTitle:kWebBrowserForwardString];
-    [self.awesomeToolbar setEnabled:[self.webView isLoading] forButtonWithTitle:kWebBrowserStopString];
-    [self.awesomeToolbar setEnabled:![self.webView isLoading] && self.webView.URL forButtonWithTitle:kWebBrowserRefreshString];
+    [self.awesomeToolbar setEnabled:[self.webView canGoBack] forButtonWithIndex:0];
+    [self.awesomeToolbar setEnabled:[self.webView canGoForward] forButtonWithIndex:1];
+    [self.awesomeToolbar setEnabled:[self.webView isLoading] forButtonWithIndex:2];
+    [self.awesomeToolbar setEnabled:![self.webView isLoading] && self.webView.URL forButtonWithIndex:3];
     
 }
 
@@ -148,15 +149,60 @@
 #pragma mark AwesomeFloatingToolbarDelegate
 
 - (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didSelectButtonWithTitle:(NSString *)title {
-    if ([self.title isEqualToString:kWebBrowserBackString]) {
+    if ([title isEqualToString:kWebBrowserBackString]) {
         [self.webView goBack];
-    } else if ([self.title isEqualToString:kWebBrowserForwardString]) {
+    } else if ([title isEqualToString:kWebBrowserForwardString]) {
         [self.webView goForward];
-    } else if ([self.title isEqualToString:kWebBrowserStopString]) {
+    } else if ([title isEqualToString:kWebBrowserStopString]) {
         [self.webView stopLoading];
-    } else if ([self.title isEqualToString:kWebBrowserRefreshString]) {
+    } else if ([title isEqualToString:kWebBrowserRefreshString]) {
         [self.webView reload];
     }
+}
+
+- (void)floatingToolBar:(AwesomeFloatingToolbar *)toolbar didTryToPanWithOffset:(CGPoint)offset {
+    CGPoint startingPoint = toolbar.frame.origin;
+    CGPoint newPoint = CGPointMake(startingPoint.x + offset.x, startingPoint.y + offset.y);
+    
+    CGRect potentialNewFrame = CGRectMake(newPoint.x, newPoint.y, CGRectGetWidth(toolbar.frame), CGRectGetHeight(toolbar.frame));
+    
+    if (CGRectContainsRect(self.view.bounds, potentialNewFrame)) {
+        toolbar.frame = potentialNewFrame;
+    }
+}
+
+- (void)floatingToolBarDidTryToPinchWithScale:(UIPinchGestureRecognizer*)recognizer {
+    // use the scale to adjust the toolbar size
+    // this line seems to scale just the text
+    recognizer.view.transform = CGAffineTransformScale(recognizer.view.transform, recognizer.scale, recognizer.scale);
+    
+    // CGContextScaleCTM(toolbar.frame, scale, scale);
+    // I can't figure out how to use transform (no parameters) and exploration
+    // into it led me to CGAffineTransform which then led me to CGContextScaleCTM
+    // I can't figure out what "context" to put as the first argument
+}
+
+- (void)forwardPressed {
+    [self.awesomeToolbar.forwardButton setAlpha:1];
+    [self.webView goForward];
+    [self.awesomeToolbar.forwardButton setAlpha:0.25];
+}
+
+- (void)backPressed {
+    [self.webView goBack];
+}
+
+- (void)refreshPressed {
+    // tried to get the refresh button to react to the button press but it happens too quickly
+    // the updateButtonsAndTitle function manages it anyway
+    
+    [self.awesomeToolbar.refreshButton setAlpha:1];
+    [self.webView reload];
+    [self.awesomeToolbar.refreshButton setAlpha:0.25];
+}
+
+- (void)stopPressed {
+    [self.webView stopLoading];
 }
 
 @end
