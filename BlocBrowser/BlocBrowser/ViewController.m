@@ -179,7 +179,6 @@
     // I can't figure out how to use transform (no parameters) and exploration
     // into it led me to CGAffineTransform which then led me to CGContextScaleCTM
     // I can't figure out what "context" to put as the first argument
-    
 }
 
 @end

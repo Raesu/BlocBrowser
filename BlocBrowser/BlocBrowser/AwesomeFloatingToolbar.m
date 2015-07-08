@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchGesture;
+@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGesture;
 
 @end
 
@@ -71,6 +72,8 @@
     [self addGestureRecognizer:self.panGesture];
     self.pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchFired:)];
     [self addGestureRecognizer:self.pinchGesture];
+    self.longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressFired:)];
+    [self addGestureRecognizer:self.longPressGesture];
     
     return self;
 }
@@ -158,6 +161,13 @@
         [self.delegate floatingToolBar:self didTryToPinchWithScale:[recognizer scale]];
     }
 
+}
+
+- (void)longPressFired:(UILongPressGestureRecognizer *)recognizer {
+    NSLog(@"New long press.");
+    if (self.delegate respondsToSelector:@selector(floatingToolBar)) {
+        <#statements#>
+    }
 }
 
 
